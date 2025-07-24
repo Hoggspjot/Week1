@@ -1,16 +1,18 @@
 public class PatternBuilder {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
 
         Person person = new Person.Builder().setName("Bob").setAge(25).build();
 
         System.out.println(person);
 
+        Person cloned = (Person) person.clone();
+        System.out.println(cloned);
     }
 
 }
 
 
-class Person {
+class Person implements Cloneable{
     private String name;
     private int age;
 
@@ -37,6 +39,11 @@ class Person {
             return new Person(this);
         }
 
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @Override
